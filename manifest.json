@@ -1,0 +1,28 @@
+{
+    "name": "Epilepsy Safe Viewer",
+    "description": "SHields bright flashes of lights over youtuve videos to prevent epilespy",
+    "version": "1.0",
+    "manifest_version": 2,
+    "content_scripts": [
+		{
+			"matches": [
+				"https://*.youtube.com/*"
+			],
+			"css": [
+			],
+			"js": [
+				"content.js"
+			],
+			"run_at": "document_end",
+			"all_frames": true
+		}
+	],
+    "permissions": [
+        "tabs",
+        "activeTab",
+		"webRequest"
+    ],
+    "host_permissions": [
+        "*://*/*"
+      ]
+  }
