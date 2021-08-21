@@ -1,28 +1,23 @@
 {
-    "name": "Epilepsy Video Detector for Youtube",
-    "description": "Blocks sections of Youtube videos that may cause seizures in people suffering from epilepsy.",
-    "version": "1.0",
+    "name": "Epilepsy Safe Viewer",
+    "description": "Dims bright flashes of lights over YouTube videos to prevent seizures ",
+	"version": "1.0",
     "manifest_version": 3,
+	"icons" :{
+		"16": "/esv.png",
+		"48": "/esv.png",
+		"128": "/esv.png"
+	},
     "content_scripts": [
 		{
 			"matches": [
 				"https://*.youtube.com/*"
 			],
-			"css": [
-			],
 			"js": [
-				"content.js"
+				"chromeExt.js"
 			],
 			"run_at": "document_end",
 			"all_frames": true
 		}
-	],
-    "permissions": [
-        "tabs",
-        "activeTab",
-		"webRequest"
-    ],
-    "host_permissions": [
-        "*://*/*"
-      ]
+	]
   }
