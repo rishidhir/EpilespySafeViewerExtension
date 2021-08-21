@@ -1,27 +1,27 @@
 {
     "name": "Epilepsy Safe Viewer",
-    "description": "SHields bright flashes of lights over youtuve videos to prevent epilespy",
+    "description": "Shields bright flashes of lights over youtuve videos to prevent epilespy",
     "version": "1.0",
     "manifest_version": 2,
 	"icons":{
         "16": "/esv.png",
         "48": "/esv.png",
-        "128": "/esv.png"  
-    }
-    // "content_scripts": [
-	// 	{
-	// 		"matches": [
-	// 			"https://*.youtube.com/*"
-	// 		],
-	// 		"css": [
-	// 		],
-	// 		"js": [
-	// 			"content.js"
-	// 		],
-	// 		"run_at": "document_end",
-	// 		"all_frames": true
-	// 	}
-	// ],
+        "128": "/esv.png"
+    },
+    "content_scripts": [
+	{
+	 		"matches": [
+				"https://*.youtube.com/*"
+			],
+			"css": [
+			],
+	 		"js": [
+	 			"content.js"
+			],
+			"run_at": "document_end",
+			"all_frames": true
+		}
+	]
     // "permissions": [
     //     "tabs",
     //     "activeTab",
