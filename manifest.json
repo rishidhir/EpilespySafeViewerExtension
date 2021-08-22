@@ -4,9 +4,9 @@
 	"version": "1.0",
     "manifest_version": 3,
 	"icons" :{
-		"16": "/esv.png",
-		"48": "/esv.png",
-		"128": "/esv.png"
+		"16": "/esv1.png",
+		"48": "/esv1.png",
+		"128": "/esv1.png"
 	},
     "content_scripts": [
 		{
