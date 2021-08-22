@@ -1,12 +1,12 @@
 {
     "name": "Epilepsy Safe Viewer",
-    "description": "Dims bright flashes of lights over YouTube videos to prevent seizures ",
+    "description": "Dims bright flashes of lights over YouTube videos to prevent seizures from potential trigger warnings.",
 	"version": "1.0",
     "manifest_version": 3,
 	"icons" :{
-		"16": "/esv1.png",
-		"48": "/esv1.png",
-		"128": "/esv1.png"
+		"16": "/icon.png",
+		"48": "/icon.png",
+		"128": "/icon.png"
 	},
     "content_scripts": [
 		{
@@ -14,7 +14,7 @@
 				"https://*.youtube.com/*"
 			],
 			"js": [
-				"chromeExt.js"
+				"chromeExt.ts"
 			],
 			"run_at": "document_end",
 			"all_frames": true
