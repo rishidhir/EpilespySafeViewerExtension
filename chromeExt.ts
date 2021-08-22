@@ -4,8 +4,9 @@ var OVERLAY = {
     state: 0
 }
 
-var isLoaderDisplayedYet = false;
+var isLoaderDisplayedYet = false;//used to keep video unpaused 
 
+//Customize the cover for the video
 var seizureMessage = "Potential Trigger Warning: ESV Shield Applied"
 var coverColour = "black"
 var coverOpacity = "0.9"
@@ -42,7 +43,7 @@ function displayLoader() {
     video.parentElement.appendChild(loaderCover)
 }
 
-function navigate(){
+function navigate(){//Once user is chosen a youtube video
     if ('/watch' === location.pathname){
         getOverlayTime()
         .then((coverTime) => {
@@ -51,19 +52,19 @@ function navigate(){
     }
 }
 
-function getOverlayTime(){
+function getOverlayTime(){//Make request to backend based on youtube URL to recieve timestamps for warning
     return fetch('http://127.0.0.1:5000/get_potential_seizure_timestamps?url='+location.href, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({}),
-        })
+        })//recieve data
         .then(response => response.json())
         .then(data => {
             for(let i = 0; i < data['result'].length; i++) {
-                if (data['result'][i][1] === true) {
-                    alert("There are potential seizure trigger warnings in this video that will be filtered by ESV. Viewers Discretion is advised.")
+                if (data['result'][i][1] === true) {//Check if video contains time periods of flashing lights to provide user a warning beforehand
+                    alert("There are potential seizure trigger warnings in this video that will be filtered by ESV. Viewers Discretion is advised.")//warning
                     break
                 }
             }
@@ -75,7 +76,7 @@ function getOverlayTime(){
 }
 
 
-function coverFilter(coverTime){
+function coverFilter(coverTime){//used to create and apply the cover over the youtube video
 
     let covers = document.getElementsByClassName('ESV')
     let youTubeVideos = document.getElementsByTagName("video");
@@ -86,6 +87,7 @@ function coverFilter(coverTime){
         if(youTubeVideos.length == 0){
             return
         }
+        //Create the cover for the video (Hidden) + stylying for the cover
         const cover = document.createElement('div');
         cover.innerHTML = seizureMessage;
         cover.className = 'ESV';
@@ -105,22 +107,23 @@ function coverFilter(coverTime){
         youTubeVideos[0].parentElement.appendChild(cover)
         covers = document.getElementsByClassName('ESV')
     }
-    cover = covers[0]
-    if (coverTime){
+    cover = covers[0];
+    if (coverTime){//Activate the cover 
         cover.style.display = "block"
     }
-    else{
+    else{//Disable the cover
         cover.style.display = "none"
     }
 }
 
-function activateCover(){
+function activateCover(){//get current playback time and apply filter
     video_streams = document.getElementsByClassName('video-stream')
     if (video_streams.length == 0){
         return
     }
     video_stream = video_streams[0]
     currtime = video_stream.currentTime;
+    
     while (OVERLAY['state'] < OVERLAY['times'].length && currtime >= OVERLAY['times'][OVERLAY['state']][0]){
         coverFilter(OVERLAY['times'][OVERLAY['state']][1])
         OVERLAY['state'] += 1
@@ -128,17 +131,17 @@ function activateCover(){
 }
 
 setInterval(() => {
-    if (!isLoaderDisplayedYet) {
+    if (!isLoaderDisplayedYet) {//have the video paused before the preprocessing 
         displayLoader();
         isLoaderDisplayedYet = true;
     }
 
-    if (CURRENT_PAGE != location.href) {
+    if (CURRENT_PAGE != location.href) {//calls the navigate function once page has been changed 
         CURRENT_PAGE = location.href;
         navigate();
     }
 }, 1000)
 
 setInterval(() => {
-    activateCover()
+    activateCover()//call activate cover
 }, 50)
