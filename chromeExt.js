@@ -4,11 +4,11 @@ BLOCK = {
     state: 0
 }
 
-var seizureMessage = "ESV Screen Applied"
+var seizureMessage = "ESV shield Applied"
 var coverColour = "black"
-var coverOpacity = "0.9"
-var textColour = "white"
-var coverFontsize = "50px"
+var coverOpacity = "0.5"
+var textColour = "grey"
+var coverFontsize = "25px"
 
 
 function Navigate(){
@@ -64,7 +64,7 @@ function coverFilter(coverTime){
         cover.style.fontSize = coverFontsize;
         cover.style.left = youTubeVideo.style.left;
         cover.style.top = youTubeVideo.style.top;
-        cover.style.paddingTop = "200px";
+        cover.style.paddingTop = "250px";
         
         youTubeVideos[0].parentElement.appendChild(cover)
         covers = document.getElementsByClassName('ESV')
